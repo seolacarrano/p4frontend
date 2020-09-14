@@ -56,13 +56,13 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 
 | Letter | Component | Priority | Estimated Time | Time Invested |
 | --- | :---: |  :---: | :---: | :---: |
-| A | Wireframe | H | 1hr | -hr |
+| A | Wireframe | H | 1hr | 1hr |
 | B | Hamburger Menu | H | 1hr | -hr |
 | C | Login HTML & CSS | H | 3hrs | -hr |
 | D | Category page HTML & CSS | H | 3hr | -hr |
 | E | Note page HTML & CSS | H | 3hrs | -hr |
 | F | Vue Research | H | 5hrs | -hr |
-| G | Login Implementation | H | 5hrs | -hr |
+| G | Login Implementation | H | 5hrs | 5hrs |
 | H | Read Function for Category | H | 3hrs | -hr |
 | I | Update Function for Category | H | 3hrs | -hr |
 | J | Delete Function for Category | H | 3hrs | -hr |

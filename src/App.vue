@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Header/>
+      <Header v-bind:URL="URL" />
       Hello
 
       
     </div>
-    <router-view/>
+    <router-view @loggedIn="login($event)"/>
     <Footer/>
   </div>
 </template>
@@ -20,9 +20,23 @@ export default {
   components: {
     Header,
     Footer
-  }
-  
-}
+  },
+  data:function(){
+    return {
+      loggedIn: false,
+      token: '',   
+      URL: 'http://localhost:8000'
+    }
+  },
+  methods: {
+    login: function(event){
+      console.log('event heard')
+      this.loggedIn = true
+      this.token = event
+      this.$router.push('/')
+    }
+  }  
+};
 </script>
 
 <style>
