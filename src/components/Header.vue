@@ -14,7 +14,7 @@
           <router-link to="/">Home</router-link>
         </b-navbar-item>
         <b-navbar-item href="#">
-          <router-link to="/Page2">About</router-link>
+          <router-link to="/Main">Category</router-link>
         </b-navbar-item>
         <b-navbar-dropdown label="Info">
           <b-navbar-item href="#">
@@ -32,7 +32,7 @@
             <a class="button is-primary">
               <strong>Sign up</strong>
             </a>
-            <router-link to="/login" v-bind:URL="URL" v-if="!loggedIn"><button class="button is-link">Log in</button></router-link>  <!--if logged in is not true, show the login button -->
+            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><button class="button is-link">Log in</button></router-link>  <!--if logged in is not true, show the login button -->
             <button v-if="loggedIn" class="button is-link" @click="logout">Logout</button>
           </div>
         </b-navbar-item>

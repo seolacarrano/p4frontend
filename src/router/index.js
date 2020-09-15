@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Page2 from '../views/Page2.vue'
+import Main from '../views/Main.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
@@ -19,9 +19,10 @@ Vue.use(VueRouter)
     props: true
   },
   {
-    path: '/page2',
-    name: 'Page2',
-    component: Page2
+    path: '/main',
+    name: 'Main',
+    component: Main,
+    props: true
   },
 ]
 
