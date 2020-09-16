@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    This will be the first page
+    <img src = "https://res.cloudinary.com/dqduwnrb1/image/upload/v1600227980/Untitled_presentation_4_lnxum0.jpg">
   </div>
 </template>
 

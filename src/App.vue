@@ -2,7 +2,6 @@
   <div id="app">
     <div id="nav">
       <Header v-bind:URL="URL" v-bind:loggedIn="loggedIn" @logout="logout" />
-      Hello   
     </div>
     <router-view @loggedIn="login($event)"/>
     <Footer/>
@@ -39,6 +38,7 @@ export default {
     logout: function(){
       this.loggedIn = false;
       this.token = {};
+      this.$router.push('/')
     },
   },  
 };
@@ -65,4 +65,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>

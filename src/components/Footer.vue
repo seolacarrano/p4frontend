@@ -1,12 +1,6 @@
 <template>
 <div>
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
-      This is footer
-    </p>
-  </div>
-</footer>
+<footer id="footer"></footer>
 </div>
 </template>
 
@@ -17,5 +11,11 @@ export default {
 </script>
 
 <style>
-
+#footer {
+  background-color: white;
+  height: 30px;
+  margin: 0 auto;
+  /* bottom: 0;
+  position: fixed; */
+}
 </style>

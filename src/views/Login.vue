@@ -1,13 +1,12 @@
 <template>
   <div class="login">
     <b-field label="Username"
-            type="is-success"
-            message="This username is available">
-            <b-input v-model="username"></b-input>
+            type="is-danger">
+            <b-input id="username_ip" v-model="username"></b-input>
         </b-field>
 
         <b-field label="Password">
-            <b-input type="password"
+            <b-input id="password_ip" type="password"
                 v-model="password"
                 password-reveal>
             </b-input>
@@ -54,5 +53,9 @@ export default {
 .login {
   width: 50%;
   margin: 10px auto;
+}
+
+#username_ip, #password_ip {
+    border: 1px solid#42b983;
 }
 </style>
