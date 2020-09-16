@@ -63,9 +63,9 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 | E | Note page HTML & CSS | H | 3hrs | -hr |
 | F | Vue Research | H | 5hrs | -hr |
 | G | Login Implementation | H | 5hrs | 5hrs |
-| H | Read Function for Category | H | 3hrs | 4hrs |
-| I | Update Function for Category | H | 3hrs | -hr |
-| J | Delete Function for Category | H | 3hrs | -hr |
+| H | Create Function for Category | H | 3hrs | 3hrs |
+| I | Read Function for Category | H | 3hrs | 4hrs |
+| J | Delete Function for Category | H | 3hrs | 1hr |
 | K | Create Function for Note | H | 2hrs | -hr |
 | L | Read Function for Note | H | 2hrs | -hr |
 | M | Update Function for Note | H | 2hrs | -hr |

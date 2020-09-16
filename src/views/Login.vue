@@ -38,10 +38,22 @@ export default {
                     password: this.password,
                 }),
             })
-            .then(response => response.json())
+            .then(response => 
+            {
+                if (response.status !== 200) {
+                    response.json()
+                } else {
+                    return response.json()
+                }
+            }
+            )
             .then(data => {
                 console.log(data)
+                if (data) {
                 this.$emit('loggedIn', data)
+                } else {
+                    alert('In correct login')
+                }
             });
         },
     },
