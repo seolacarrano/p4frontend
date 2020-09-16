@@ -61,19 +61,20 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 | C | Login HTML & CSS | H | 3hrs | -hr |
 | D | Category page HTML & CSS | H | 3hr | -hr |
 | E | Note page HTML & CSS | H | 3hrs | -hr |
-| F | Vue Research | H | 5hrs | -hr |
+| F | Vue Research | H | 5hrs | 8hrs |
 | G | Login Implementation | H | 5hrs | 5hrs |
 | H | Create Function for Category | H | 3hrs | 3hrs |
 | I | Read Function for Category | H | 3hrs | 4hrs |
-| J | Delete Function for Category | H | 3hrs | 1hr |
-| K | Create Function for Note | H | 2hrs | -hr |
-| L | Read Function for Note | H | 2hrs | -hr |
-| M | Update Function for Note | H | 2hrs | -hr |
-| N | Delete Function for List | H | 2hr | -hr |
-| O | Login HTML/CSS Debugging | H | 3hrs | -hr |
-| P | Category HTML/CSS Debugging | H | 3hrs | -hr |
-| Q | Note HTML/CSS Debugging | H | 3hrs | -hr |
-| R | Blackbox Testing & Deployment | H | 3hrs | -hr |
+| J | Update Function for Category | H | 3hrs | 2hrs |
+| K | Delete Function for Category | H | 3hrs | 1hr |
+| L | Create Function for Note | H | 2hrs | -hr |
+| M | Read Function for Note | H | 2hrs | -hr |
+| N | Update Function for Note | H | 2hrs | -hr |
+| O | Delete Function for List | H | 2hr | -hr |
+| P | Login HTML/CSS Debugging | H | 3hrs | -hr |
+| Q | Category HTML/CSS Debugging | H | 3hrs | -hr |
+| R | Note HTML/CSS Debugging | H | 3hrs | -hr |
+| S | Blackbox Testing & Deployment | H | 3hrs | -hr |
 | - | Total | - | 50hrs | -hrs |
 
 #### PostMVP

@@ -24,7 +24,7 @@
           <div class="buttons">
             <b-button type="is-danger">Sign Up</b-button>
             <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="is-danger">Log in</b-button></router-link>  <!--if logged in is not true, show the login button -->
-            <button v-if="loggedIn" class="button is-link" @click="logout">Logout</button>
+            <b-button v-if="loggedIn" class="button is-link" @click="logout" type="is-success">Logout</b-button>
           </div>
         </b-navbar-item>
       </template>
