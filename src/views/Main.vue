@@ -6,10 +6,10 @@
     </b-field>
     <b-button type="is-danger" @click="newCategory">Add</b-button><br/><br/>
 
-    <b-field label="Edit Category" type="is-success">
+    <!-- <b-field label="Edit Category" type="is-success">
      <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>
     </b-field>
-    <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button><br/><br/>  
+    <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button><br/><br/>   -->
 
     <ul class="all_categories">
       <li v-for="category of categories" v-bind:key="category.id">
@@ -18,18 +18,26 @@
         
         <!-- ------dropddown-------- -->
         <b-dropdown aria-role="list">
-            <button id="category_button" class="button is-primary" slot="trigger" slot-scope="{ active }">
+            <b-button id="category_button" type="is-success" slot="trigger" slot-scope="{ active }">
                 <span id="category_btn_span">•••</span>
                 <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
-            </button>
+            </b-button>
 
-            <!-- <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="button is-success is-outlined" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item> -->
-            <b-dropdown-item aria-role="listitem"><button class="button is-success is-outlined" data-target="#category_edit_modal">Edit</button></b-dropdown-item>
+            <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="button is-success is-outlined" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
             <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button></b-dropdown-item>
         </b-dropdown>
+
+        <!-- ----- toggle ------ -->
+        <div>
+        <b-message title="Default" class="category_toggle" v-model="isActive" aria-close-label="Close message">
+            <b-input class="category_toggle" id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
+            <b-button class="category_toggle" type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button> 
+        </b-message>
+        </div>
+       
        
         <!-- MODAL -->
-        <div class="modal fade" id="category_edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered"  role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -42,12 +50,20 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" @click="() => {editSelect(category.id, category.title)}" data-dismiss="modal">Update Item</button>
+                <button type="button" class="btn btn-primary" v-on:click="editCategory" data-dismiss="modal">Edit</button>
                 </div>
             </div>
             </div>
-        </div>
+        </div> -->
+        <!-- END OF MODAL -->
 
+         <!-- MODAL popup-->
+        <!-- <div id="popup" class="modalpop">
+            <a href="#" class="close">&times;</a>
+            <input type="text" placeholder="Edit Board" class="edit_ip" required v-model="edittitle">
+            <button type="submit" class="board-edit" id="save_edit" v-on:click="editCategory">Edit</button>
+        </div>
+        <a href="#" class="closepop"></a> -->
       <!-- END OF MODAL -->
 
           <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button> -->
@@ -59,54 +75,8 @@
 </template>
 
 <script>
-// ------------------------modal------------------------ 
-    // const ModalForm = {
-    //     props: ['email', 'password', 'canCancel'],
-    //     template: `
-    //         <form action="">
-    //             <div class="modal-card" style="width: auto">
-    //                 <header class="modal-card-head">
-    //                     <p class="modal-card-title">Login</p>
-    //                     <button
-    //                         type="button"
-    //                         class="delete"
-    //                         @click="$emit('close')"/>
-    //                 </header>
-    //                 <section class="modal-card-body">
-    //                     <b-field label="Email">
-    //                         <b-input
-    //                             type="email"
-    //                             :value="email"
-    //                             placeholder="Your email"
-    //                             required>
-    //                         </b-input>
-    //                     </b-field>
-
-    //                     <b-field label="Password">
-    //                         <b-input
-    //                             type="password"
-    //                             :value="password"
-    //                             password-reveal
-    //                             placeholder="Your password"
-    //                             required>
-    //                         </b-input>
-    //                     </b-field>
-
-    //                     <b-checkbox>Remember me</b-checkbox>
-    //                 </section>
-    //                 <footer class="modal-card-foot">
-    //                     <button class="button" type="button" @click="$emit('close')">Close</button>
-    //                     <button class="button is-primary">Login</button>
-    //                 </footer>
-    //             </div>
-    //         </form>
-    //     `
-    // }
 
 export default {
-  // components: {
-  //           ModalForm
-  //       },
   name: 'Main',
   data: function(){
     return {
@@ -114,11 +84,7 @@ export default {
       title: "",
       edittitle: "",
       editid: null,
-      // isComponentModalActive: false,
-      // formProps: {
-      //               email: 'evan@you.com',
-      //               password: 'testing'
-      //           }
+      isActive: false
     };
   },
   created: function() {
@@ -209,11 +175,16 @@ export default {
 
 #category_button {
   width: 50%;
-  height: 100%;
+  height: 50%;
 }
 
 #category_btn_span {
   text-align: center;
-  padding-right: 4px;
+  margin-left: 15px;
+}
+
+.category_toggle {
+  width: 300px;
+  height: 150px;
 }
 </style>
