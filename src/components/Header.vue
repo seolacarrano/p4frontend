@@ -16,6 +16,9 @@
         <b-navbar-item href="#">
           <router-link to="/Main">Category</router-link>
         </b-navbar-item>
+        <b-navbar-item href="#">
+          <router-link to="/Note">Note</router-link>
+        </b-navbar-item>
    
       </template>
 

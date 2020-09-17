@@ -14,32 +14,35 @@
 
     <ul class="all_categories">
       <li v-for="category of categories" v-bind:key="category.id">
-        <div class="category_container">
-           {{category.title}}
-        
-        <!-- ------dropddown-------- -->
-        <b-dropdown id="category_dropdown" aria-role="list">
-            <b-button id="category_button" type="is-success" slot="trigger" slot-scope="{ active }">
-                <span id="category_btn_span">•••</span>
-                <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
-            </b-button>
-            
-            <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="edit_btn" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
-            <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="del_btn" @click="deleteCategory">Delete</button></b-dropdown-item>
-            
-        </b-dropdown>
+        <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"> 
+          <div class="category_container">
+            {{category.title}} 
+          
+          <!-- ------dropddown-------- -->
+          <b-dropdown id="category_dropdown" aria-role="list">
+              <b-button id="category_button" type="is-success" slot="trigger" slot-scope="{ active }">
+                  <span id="category_btn_span">•••</span>
+                  <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
+              </b-button>
+              
+              <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="edit_btn" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
+              <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="del_btn" @click="deleteCategory">Delete</button></b-dropdown-item>
+              
+          </b-dropdown>
 
-        <!-- ----- toggle ------ -->
-        <div class="category_toggle">
-        <b-message title="Edit Category"  v-model="isActive" aria-close-label="Close message">
-            <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
-            <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button> 
-        </b-message>
-        </div>
+          <!-- ----- toggle ------ -->
+          <div class="category_toggle">
+          <b-message title="Edit Category"  v-model="isActive" aria-close-label="Close message">
+              <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
+              <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button> 
+          </b-message>
+          </div>
+          
 
-          <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button> -->
-          <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="() => {editSelect(category.id, category.title)}">Edit</button> -->
-        </div>  
+            <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button> -->
+            <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="() => {editSelect(category.id, category.title)}">Edit</button> -->
+          </div>
+        </router-link> 
       </li>
     </ul>    
   </div>
@@ -152,7 +155,7 @@ export default {
 .category_container {
   height: 150px;
   width: 150px;
-  padding-top: 2.5rem;
+  padding-top: 2rem;
   margin-left: 5rem;
   margin-right: 5rem;
   border: 1px solid black;
