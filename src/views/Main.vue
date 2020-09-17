@@ -1,10 +1,11 @@
 <template>
   <div class="main">
-
-    <b-field label="New Category" type="is-success">
-     <b-input id="title_ip" type="text" v-model="title" maxlength="30"></b-input>
-    </b-field>
-    <b-button type="is-danger" @click="newCategory">Add</b-button><br/><br/>
+    
+    <div class="new_category">
+    <p id="title_msg"> Add a new Category</p>
+    <b-input id="title_ip" type="text" v-model="title" maxlength="30"></b-input>
+    <b-button id="title_btn" type="is-danger" @click="newCategory">Add</b-button><br/><br/>
+    </div>
 
     <!-- <b-field label="Edit Category" type="is-success">
      <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>
@@ -17,54 +18,24 @@
            {{category.title}}
         
         <!-- ------dropddown-------- -->
-        <b-dropdown aria-role="list">
+        <b-dropdown id="category_dropdown" aria-role="list">
             <b-button id="category_button" type="is-success" slot="trigger" slot-scope="{ active }">
                 <span id="category_btn_span">•••</span>
                 <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
             </b-button>
-
+            
             <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="button is-success is-outlined" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
             <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button></b-dropdown-item>
+            
         </b-dropdown>
 
         <!-- ----- toggle ------ -->
-        <div>
-        <b-message title="Default" class="category_toggle" v-model="isActive" aria-close-label="Close message">
-            <b-input class="category_toggle" id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
-            <b-button class="category_toggle" type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button> 
+        <div class="category_toggle">
+        <b-message title="Edit Category"  v-model="isActive" aria-close-label="Close message">
+            <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
+            <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button> 
         </b-message>
         </div>
-       
-       
-        <!-- MODAL -->
-        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm modal-dialog-centered"  role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                <input type="text" v-model="edittitle">
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" v-on:click="editCategory" data-dismiss="modal">Edit</button>
-                </div>
-            </div>
-            </div>
-        </div> -->
-        <!-- END OF MODAL -->
-
-         <!-- MODAL popup-->
-        <!-- <div id="popup" class="modalpop">
-            <a href="#" class="close">&times;</a>
-            <input type="text" placeholder="Edit Board" class="edit_ip" required v-model="edittitle">
-            <button type="submit" class="board-edit" id="save_edit" v-on:click="editCategory">Edit</button>
-        </div>
-        <a href="#" class="closepop"></a> -->
-      <!-- END OF MODAL -->
 
           <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button> -->
           <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="() => {editSelect(category.id, category.title)}">Edit</button> -->
@@ -154,23 +125,49 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+#title_msg {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.5rem;
+}
+
+#title_ip, #title_btn {
+  margin-top: 15px;
+}
+
 #title_ip, #edit_ip {
   width: 50%;
 }
 
 .all_categories {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap-reverse;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: large;
+  margin-top: 20px;
 }
 
 .category_container {
   height: 150px;
   width: 150px;
+  padding-top: 2.5rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
   border: 1px solid black;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
+  border: 1px solid #42b983;
+  border-radius: 8px;
+  /* background-image: url("https://res.cloudinary.com/dqduwnrb1/image/upload/v1600310362/coding_asvhd8.jpg"); */
+  font-family: 'Ubuntu', sans-serif;
+  color: red;
+}
+
+#category_dropdown {
+  padding-top: 0.5rem;
 }
 
 #category_button {
@@ -184,7 +181,11 @@ export default {
 }
 
 .category_toggle {
-  width: 300px;
-  height: 150px;
+  width: 200px;
+  height: 50px;
+}
+
+#edit_ip {
+  width: 80%;
 }
 </style>
