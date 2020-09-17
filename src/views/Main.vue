@@ -24,8 +24,8 @@
                 <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
             </b-button>
             
-            <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="button is-success is-outlined" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
-            <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button></b-dropdown-item>
+            <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="edit_btn" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
+            <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="del_btn" @click="deleteCategory">Delete</button></b-dropdown-item>
             
         </b-dropdown>
 
@@ -170,10 +170,28 @@ export default {
   padding-top: 0.5rem;
 }
 
-#category_button {
+.edit_btn {
+  padding-left: 1rem;
+  padding-right: 0.9rem;
+}
+
+.del_btn, .edit_btn {
+  margin-left: 3rem;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+/* #category_button {
   width: 50%;
   height: 50%;
-}
+} */
 
 #category_btn_span {
   text-align: center;
