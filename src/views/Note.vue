@@ -1,12 +1,32 @@
 <template>
  <div class="note">
+  <!-- modal attempt -->
+  <!-- <section>
+        <button class="button is-primary is-medium"
+            @click="isComponentModalActive = true">
+            Launch component modal
+        </button>
+
+        <b-modal 
+            v-model="isComponentModalActive"
+            has-modal-card
+            trap-focus
+            :destroy-on-hide="false"
+            aria-role="dialog"
+            aria-modal>
+            <template #default="props">
+                <modal-form v-bind="formProps" @close="props.close"></modal-form>
+            </template>
+        </b-modal>
+    </section> -->
+  <!-- modal attempt end -->
 
   <div class="new_note">
     <p id="note_create_msg"> Add a New Note</p>
-    <b-input class="note_create_ip" type="text" placeholder="title" v-model="title" maxlength="30"></b-input>
-    <b-input class="note_create_ip" type="text" placeholder="description" v-model="description" maxlength="30"></b-input>
-    <b-input class="note_create_ip" type="text" placeholder="solution" v-model="solution" maxlength="30"></b-input>
-    <b-input class="note_create_ip" type="text" placeholder="reference" v-model="reference" maxlength="30"></b-input>
+    <b-input class="note_create_ip" type="text" placeholder="title" v-model="title" maxlength="100"></b-input>
+    <b-input class="note_create_ip" type="textarea" placeholder="description" v-model="description" maxlength="250"></b-input>
+    <b-input class="note_create_ip" type="textarea" placeholder="solution" v-model="solution" maxlength="250"></b-input>
+    <b-input class="note_create_ip" type="text" placeholder="reference" v-model="reference" maxlength="100"></b-input>
     <b-button id="note_title_btn" type="is-danger" @click="newNote">Add</b-button><br/><br/>
   </div>
 
@@ -18,6 +38,7 @@
               {{note.solution}} <br/>
               {{note.reference}} <br/>
             </div>
+            <button v-bind:id="note.id" class="button is-success is-outlined" @click="deleteNote">Delete</button>
         </li>
     </ul>
 </div>
@@ -33,8 +54,6 @@ export default {
       description: "",
       solution: "",
       reference: "",
-      // category: "",
-      // noteInput: "",
     };
   },
   created: function() {
@@ -44,7 +63,6 @@ export default {
     newNote: function() {
       const {token, URL} = this.$route.query;
       const category = this.$route.params.categoryid;
-      console.log(category)
 
       fetch(`${URL}/api/categories/${this.$route.params.categoryid}/notes`, {
       method: "post",
@@ -52,7 +70,7 @@ export default {
         authorization: `JWT ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title: this.title }, {description: this.description}, {solution: this.solution}, {reference: this.reference}, {category: {category}}),
+      body: JSON.stringify({ title: this.title, description: this.description, solution: this.solution, reference: this.reference, category: category}),
     }).then(() => {
        this.getNote();
     });
@@ -92,6 +110,18 @@ export default {
     //         }
     //     })
     // },
+    deleteNote: function(event) {
+      const { token, URL } = this.$route.query;
+      const id = event.target.id;
+      fetch(`${URL}/api/categories/${this.$route.params.categoryid}/notes/${id}`, {
+        method: "delete",
+        headers: {
+          authorization: `JWT ${token}`,
+        },
+      }).then(() => {
+        this.getNote();
+      });
+    },
   }
 }
 </script>
