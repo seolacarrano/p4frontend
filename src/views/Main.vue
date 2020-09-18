@@ -14,13 +14,12 @@
 
     <ul class="all_categories">
       <li v-for="category of categories" v-bind:key="category.id">
-        <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"> 
           <div class="category_container">
             {{category.title}} 
-          
+          <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><b-button type="is-success">note</b-button></router-link> 
           <!-- ------dropddown-------- -->
           <b-dropdown id="category_dropdown" aria-role="list">
-              <b-button id="category_button" type="is-success" slot="trigger" slot-scope="{ active }">
+              <b-button type="is-success" slot="trigger" slot-scope="{ active }">
                   <span id="category_btn_span">•••</span>
                   <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
               </b-button>
@@ -38,11 +37,12 @@
           </b-message>
           </div>
           
+          
 
             <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button> -->
             <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="() => {editSelect(category.id, category.title)}">Edit</button> -->
           </div>
-        </router-link> 
+        
       </li>
     </ul>    
   </div>
@@ -58,7 +58,7 @@ export default {
       title: "",
       edittitle: "",
       editid: null,
-      isActive: false
+      isActive: false,
     };
   },
   created: function() {
@@ -156,6 +156,7 @@ export default {
   height: 150px;
   width: 150px;
   padding-top: 2rem;
+  padding-bottom: 9rem;
   margin-left: 5rem;
   margin-right: 5rem;
   border: 1px solid black;

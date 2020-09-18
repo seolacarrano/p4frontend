@@ -33,6 +33,8 @@ export default {
       description: "",
       solution: "",
       reference: "",
+      // category: "",
+      // noteInput: "",
     };
   },
   created: function() {
@@ -41,6 +43,8 @@ export default {
   methods: {
     newNote: function() {
       const {token, URL} = this.$route.query;
+      const category = this.$route.params.categoryid;
+      console.log(category)
 
       fetch(`${URL}/api/categories/${this.$route.params.categoryid}/notes`, {
       method: "post",
@@ -48,7 +52,7 @@ export default {
         authorization: `JWT ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title: this.title }),
+      body: JSON.stringify({ title: this.title }, {description: this.description}, {solution: this.solution}, {reference: this.reference}, {category: {category}}),
     }).then(() => {
        this.getNote();
     });
@@ -67,6 +71,27 @@ export default {
       this.notes = data;
     });
     },
+    // refreshNote: function(){
+    //   const {token, URL} = this.$route.query;
+    //   fetch(`${URL}/api/categories/${this.$route.params.categoryid}/notes`, {
+    //   method: "get",
+    //   headers: {
+    //   authorization: `JWT ${token}`,
+    //   },
+    // })
+    // .then((response) => response.json())
+    // .then(data => {
+    //     this.boardSingle = true
+    //     if (!data.response){
+    //         this.notes = data
+    //         if (!data) {
+    //             this.notes = ""
+    //         }
+    //         } else {
+    //           this.notes = []
+    //         }
+    //     })
+    // },
   }
 }
 </script>

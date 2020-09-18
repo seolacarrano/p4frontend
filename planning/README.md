@@ -67,8 +67,8 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 | I | Read Function for Category | H | 3hrs | 4hrs |
 | J | Update Function for Category | H | 3hrs | 3hrs |
 | K | Delete Function for Category | H | 3hrs | 1hr |
-| L | Create Function for Note | H | 2hrs | -hr |
-| M | Read Function for Note | H | 2hrs | -hr |
+| L | Create Function for Note | H | 2hrs | 5hrs |
+| M | Read Function for Note | H | 2hrs | 2hrs |
 | N | Update Function for Note | H | 2hrs | -hr |
 | O | Delete Function for List | H | 2hr | -hr |
 | P | Login HTML/CSS Debugging | H | 3hrs | -hr |
