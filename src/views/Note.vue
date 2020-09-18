@@ -2,7 +2,7 @@
  <div class="note">
 
   <div class="new_note">
-    <p id="note_create_msg"> Add a new Note</p>
+    <p id="note_create_msg"> Add a New Note</p>
     <b-input class="note_create_ip" type="text" placeholder="title" v-model="title" maxlength="30"></b-input>
     <b-input class="note_create_ip" type="text" placeholder="description" v-model="description" maxlength="30"></b-input>
     <b-input class="note_create_ip" type="text" placeholder="solution" v-model="solution" maxlength="30"></b-input>

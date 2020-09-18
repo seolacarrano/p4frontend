@@ -2,7 +2,7 @@
   <div class="main">
     
     <div class="new_category">
-    <p id="title_msg"> Add a new Category</p>
+    <p id="title_msg"> Add a New Category</p>
     <b-input id="title_ip" type="text" v-model="title" maxlength="30"></b-input>
     <b-button id="title_btn" type="is-danger" @click="newCategory">Add</b-button><br/><br/>
     </div>
@@ -15,9 +15,12 @@
     <ul class="all_categories">
       <li v-for="category of categories" v-bind:key="category.id">
           <div class="category_container">
-            {{category.title}} 
-          <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><b-button type="is-success">note</b-button></router-link> 
-          <!-- ------dropddown-------- -->
+            <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><div id="category_name"> {{category.title}} </div></router-link>
+          
+          <!----button for note page----->
+          <!-- <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><b-button type="is-success">note</b-button></router-link>  -->
+          
+          <!--------dropddown---------->
           <b-dropdown id="category_dropdown" aria-role="list">
               <b-button type="is-success" slot="trigger" slot-scope="{ active }">
                   <span id="category_btn_span">•••</span>
@@ -26,10 +29,9 @@
               
               <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="edit_btn" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
               <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="del_btn" @click="deleteCategory">Delete</button></b-dropdown-item>
-              
           </b-dropdown>
 
-          <!-- ----- toggle ------ -->
+          <!-------toggle------->
           <div class="category_toggle">
           <b-message title="Edit Category"  v-model="isActive" aria-close-label="Close message">
               <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
@@ -170,6 +172,11 @@ export default {
   color: red;
 }
 
+#category_name{
+  text-decoration: none;
+  padding-bottom: 1rem;
+}
+
 #category_dropdown {
   padding-top: 0.5rem;
 }
@@ -177,6 +184,11 @@ export default {
 .edit_btn {
   padding-left: 1rem;
   padding-right: 0.9rem;
+}
+
+.del_btn {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .del_btn, .edit_btn {
