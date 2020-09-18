@@ -11,7 +11,7 @@
       </template>
       <template slot="start">
         <b-navbar-item href="#">
-          <router-link to="/" id="home">Home</router-link>
+        <router-link to="/" id="home">Home</router-link>
         </b-navbar-item>
         <b-navbar-item href="#">
         <!-- <router-link to="/Main">Category</router-link> -->

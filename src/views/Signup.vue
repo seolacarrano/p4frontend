@@ -44,6 +44,7 @@ export default {
                     response.json().then(data => {
                         this.$router.push({
                             name: "Login",
+                            query: this.$route.query,
                             params: {message: "complete"}
                         })
                         console.log(data)
