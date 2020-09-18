@@ -14,10 +14,12 @@
           <router-link to="/" id="home">Home</router-link>
         </b-navbar-item>
         <b-navbar-item href="#">
-          <router-link to="/Main">Category</router-link>
+        <!-- <router-link to="/Main">Category</router-link> -->
+        <router-link :to="{name: 'Main', query: $attrs.info}">Category</router-link>
         </b-navbar-item>
         <b-navbar-item href="#">
-          <router-link to="/Note">Note</router-link>
+        <!-- <router-link to="/Note">Note</router-link> -->
+        <router-link :to="{name: 'Note', query: $attrs.info}">Note</router-link> 
         </b-navbar-item>
    
       </template>
@@ -25,8 +27,8 @@
       <template slot="end">
         <b-navbar-item tag="div">
           <div class="buttons">
-            <b-button type="is-danger">Sign Up</b-button>
-            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="is-danger">Log in</b-button></router-link>  <!--if logged in is not true, show the login button -->
+            <router-link :to="{name: 'Signup', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!signedUp"><b-button id="signup_btn" type="is-danger">Sign-up</b-button></router-link>  <!--if logged in is not true, show the login button -->
+            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button id="login_btn" type="is-danger">Log in</b-button></router-link>  <!--if logged in is not true, show the login button -->
             <b-button v-if="loggedIn" class="button is-link" @click="logout" type="is-success">Logout</b-button>
           </div>
         </b-navbar-item>
@@ -38,7 +40,7 @@
 <script>
 export default {
   name: "Header",
-  props: ['URL', 'loggedIn'],
+  props: ['URL', 'loggedIn', 'signedUp'],
   methods: {
     logout: function(){
       this.$emit('logout')
@@ -53,5 +55,8 @@ export default {
   margin: 10px auto
 }
 
+#signup_btn {
+  margin-right: 15px;
+}
 
 </style>

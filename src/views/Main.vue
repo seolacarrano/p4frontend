@@ -32,7 +32,7 @@
           </b-dropdown>
 
           <!-------toggle------->
-          <div class="category_toggle">
+          <div v-if="category.id == editid" class="category_toggle">
           <b-message title="Edit Category"  v-model="isActive" aria-close-label="Close message">
               <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
               <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button> 

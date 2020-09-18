@@ -1,33 +1,24 @@
 <template>
  <div class="note">
-  <!-- modal attempt -->
-  <!-- <section>
-        <button class="button is-primary is-medium"
-            @click="isComponentModalActive = true">
-            Launch component modal
-        </button>
+  
+  <div class="input_area">
+    <div class="new_note">
+      <p id="note_create_msg"> Add a New Note</p>
+      <b-input class="note_create_ip" type="text" placeholder="title" v-model="title" maxlength="100"></b-input>
+      <b-input class="note_create_ip" type="textarea" placeholder="description" v-model="description" maxlength="250"></b-input>
+      <b-input class="note_create_ip" type="textarea" placeholder="solution" v-model="solution" maxlength="250"></b-input>
+      <b-input class="note_create_ip" type="text" placeholder="reference" v-model="reference" maxlength="100"></b-input>
+      <b-button id="note_title_btn" type="is-danger" @click="newNote">Add</b-button><br/><br/>
+    </div>
 
-        <b-modal 
-            v-model="isComponentModalActive"
-            has-modal-card
-            trap-focus
-            :destroy-on-hide="false"
-            aria-role="dialog"
-            aria-modal>
-            <template #default="props">
-                <modal-form v-bind="formProps" @close="props.close"></modal-form>
-            </template>
-        </b-modal>
-    </section> -->
-  <!-- modal attempt end -->
-
-  <div class="new_note">
-    <p id="note_create_msg"> Add a New Note</p>
-    <b-input class="note_create_ip" type="text" placeholder="title" v-model="title" maxlength="100"></b-input>
-    <b-input class="note_create_ip" type="textarea" placeholder="description" v-model="description" maxlength="250"></b-input>
-    <b-input class="note_create_ip" type="textarea" placeholder="solution" v-model="solution" maxlength="250"></b-input>
-    <b-input class="note_create_ip" type="text" placeholder="reference" v-model="reference" maxlength="100"></b-input>
-    <b-button id="note_title_btn" type="is-danger" @click="newNote">Add</b-button><br/><br/>
+    <div class="edit_note">
+      <p id="note_edit_msg"> Edit Note</p>
+      <b-input class="note_edit_ip" type="text" placeholder="title" v-model="edittitle" maxlength="100"></b-input>
+      <b-input class="note_edit_ip" type="textarea" placeholder="description" v-model="editdescription" maxlength="250"></b-input>
+      <b-input class="note_edit_ip" type="textarea" placeholder="solution" v-model="editsolution" maxlength="250"></b-input>
+      <b-input class="note_edit_ip" type="text" placeholder="reference" v-model="editreference" maxlength="100"></b-input>
+      <b-button id="note_edit_btn" type="is-danger" @click="editNote">Edit</b-button><br/><br/>
+    </div>
   </div>
 
   <ul class="all_notes">
@@ -38,6 +29,7 @@
               {{note.solution}} <br/>
               {{note.reference}} <br/>
             </div>
+            <button v-bind:id="note.id" class="button is-success is-outlined" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button>
             <button v-bind:id="note.id" class="button is-success is-outlined" @click="deleteNote">Delete</button>
         </li>
     </ul>
@@ -54,6 +46,11 @@ export default {
       description: "",
       solution: "",
       reference: "",
+      edittitle: "",
+      editdescription: "",
+      editsolution: "",
+      editreference: "",
+      editnoteid: null
     };
   },
   created: function() {
@@ -89,27 +86,6 @@ export default {
       this.notes = data;
     });
     },
-    // refreshNote: function(){
-    //   const {token, URL} = this.$route.query;
-    //   fetch(`${URL}/api/categories/${this.$route.params.categoryid}/notes`, {
-    //   method: "get",
-    //   headers: {
-    //   authorization: `JWT ${token}`,
-    //   },
-    // })
-    // .then((response) => response.json())
-    // .then(data => {
-    //     this.boardSingle = true
-    //     if (!data.response){
-    //         this.notes = data
-    //         if (!data) {
-    //             this.notes = ""
-    //         }
-    //         } else {
-    //           this.notes = []
-    //         }
-    //     })
-    // },
     deleteNote: function(event) {
       const { token, URL } = this.$route.query;
       const id = event.target.id;
@@ -122,6 +98,32 @@ export default {
         this.getNote();
       });
     },
+     editSelect: function(id, title, description, solution, reference){
+      this.editnoteid = id
+      this.edittitle = title
+      this.editdescription = description
+      this.editsolution = solution
+      this.editreference = reference
+    },
+    editNote: function() {
+      const { token, URL } = this.$route.query;
+      const id = this.editnoteid;
+      const category = this.$route.params.categoryid;
+      fetch(`${URL}/api/categories/${this.$route.params.categoryid}/notes/${id}`, {
+        method: "put",
+        headers: {
+          authorization: `JWT ${token}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({title: this.edittitle, description: this.editdescription, solution: this.editsolution, reference: this.editreference, category: category})
+      }).then(() => {
+        this.getNote();
+        this.edittitle = "";
+        this.editdescription = "";
+        this.editsolution = "";
+        this.editreference = "";
+      });
+    }
   }
 }
 </script>
@@ -129,19 +131,30 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 
-#note_create_msg {
+.input_area{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+/* .new_note{
+  display: 
+}
+
+.edit_note{
+
+} */
+
+#note_create_msg, #note_edit_msg {
   font-family: 'Ubuntu', sans-serif;
   font-size: 1.5rem;
 }
 
-.note_create_ip, #note_title_btn {
+.note_create_ip, .note_edit_ip, #note_title_btn {
   margin-top: 15px;
 }
 
-.note_create_ip {
-  width: 50%;
-  margin-left: 20rem;  
-}
+
 
 .all_notes {
   display: flex;
@@ -164,7 +177,6 @@ export default {
   align-items: center;
   border: 1px solid #42b983;
   border-radius: 8px;
-  /* background-image: url("https://res.cloudinary.com/dqduwnrb1/image/upload/v1600310362/coding_asvhd8.jpg"); */
   font-family: 'Ubuntu', sans-serif;
   color: red;
 }

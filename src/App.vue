@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Header v-bind:URL="URL" v-bind:loggedIn="loggedIn" @logout="logout" />
+    <Header v-bind:info="{URL:URL,token:token}" v-bind:URL="URL" v-bind:loggedIn="loggedIn" @logout="logout" />
     </div>
     <router-view @loggedIn="login($event)"/>
+    <!-- <router-view @signedUp="signup($event)"/> -->
     <Footer/>
   </div>
 </template>
@@ -22,7 +23,7 @@ export default {
     return {
       loggedIn: false,
       token: {},   
-      URL: 'http://localhost:8000',
+      URL: 'https://sap4backend.herokuapp.com',
     };
   },
   methods: {
