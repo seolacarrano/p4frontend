@@ -223,6 +223,7 @@ export default {
   width: 80%;
 }
 
+/* ---------media query--------- */
 @media (max-width: 615px) {
   .category_container {
     margin-bottom: 20px;

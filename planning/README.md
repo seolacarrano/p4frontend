@@ -57,7 +57,7 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 | Letter | Component | Priority | Estimated Time | Time Invested |
 | --- | :---: |  :---: | :---: | :---: |
 | A | Wireframe | H | 1hr | 1hr |
-| B | Hamburger Menu | H | 1hr | -hr |
+| B | Hamburger Menu | H | 1hr | 0.5hr |
 | C | Login HTML & CSS | H | 3hrs | 0.5hr |
 | D | Category page HTML & CSS | H | 3hr | 6hrs |
 | E | Note page HTML & CSS | H | 3hrs | 7hrs |
@@ -71,9 +71,9 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 | M | Read Function for Note | H | 2hrs | 2hrs |
 | N | Update Function for Note | H | 2hrs | 1hr |
 | O | Delete Function for List | H | 2hr | 1hr |
-| P | Login HTML/CSS Debugging | H | 3hrs | -hr |
-| Q | Category HTML/CSS Debugging | H | 3hrs | -hr |
-| R | Note HTML/CSS Debugging | H | 3hrs | -hr |
+| P | Login HTML/CSS Debugging | H | 3hrs | 2hrs |
+| Q | Category HTML/CSS Debugging | H | 3hrs | 3hrs |
+| R | Note HTML/CSS Debugging | H | 3hrs | 6hrs |
 | S | Blackbox Testing & Deployment | H | 3hrs | -hr |
 | - | Total | - | 50hrs | -hrs |
 

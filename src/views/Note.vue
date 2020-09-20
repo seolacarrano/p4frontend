@@ -18,48 +18,35 @@
   <!------- get all notes / edit&delete buttons -------->
   <ul class="all_notes">
     <li class="note_list" v-for="note of notes" v-bind:key="note.id">
-      <button v-bind:id="note.id" class="get_note_btn" v-on:click="isCardModalActive = true" @click="() => {getSelect(note.id)}">{{note.title}}</button>                                    
-        <b-modal v-if="note.id == getnoteid" v-model="isCardModalActive" :width="640" scroll="keep">
+      <button v-bind:id="note.id" class="get_note_btn" v-on:click="isModalActive = true" @click="() => {getSelect(note.id)}">{{note.title}}</button>                                    
+        <!-- get notes modal -->
+        <b-modal v-if="note.id == getnoteid" v-model="isModalActive" :width="640" scroll="keep">
           <div class="card">
+            <div class="note_body">
             <div class="show_notes"><p class="division">title</p> {{note.title}} </div>
             <div class="show_notes"><p class="division">description</p> {{note.description}} </div>
             <div class="show_notes"><p class="division">solution</p> {{note.solution}} </div>
             <div class="show_notes"><p class="division">reference</p> {{note.reference}} </div>
-            
+            </div>
             <button v-bind:id="note.id" class="edit_btn" v-on:click="isCardModalActive = true" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button>                                    
             <button v-bind:id="note.id" class="del_btn" @click="deleteNote">Delete</button>
           </div>
         </b-modal>
-      <!-- <b-collapse :open="false" aria-id="contentIdForA11y1">
-        <button id="get_note_btn" slot="trigger" aria-controls="contentIdForA11y1">{{note.title}}</button>
-        <div class="notification" id="all_note_notification">
-            <div class="content">
-              <div id="note_content">  
-              <div id="description"><p class="division">description</p> {{note.description}} </div>
-              <div id="solution"><p class="division">solution</p> {{note.solution}} </div>
-              <div id="reference"><p class="division">reference</p> {{note.reference}} </div>
-              </div>
-              <div id="note_content_btn">
-              <button v-bind:id="note.id" class="edit_btn" v-on:click="isCardModalActive = true" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button>                                    
-              <button v-bind:id="note.id" class="del_btn" @click="deleteNote">Delete</button>
-              </div>
+        <!-- get notes modal end -->
+
+        <!-- edit modal -->
+        <b-modal v-if="note.id == editnoteid" v-model="isCardModalActive" :width="640" scroll="keep">
+          <div class="card">
+            <div class="card-content">
+              <b-input class="note_edit_ip" type="text" placeholder="title" v-model="edittitle" maxlength="100"></b-input>
+              <b-input class="note_edit_ip" type="textarea" placeholder="description" v-model="editdescription" maxlength="250"></b-input>
+              <b-input class="note_edit_ip" type="textarea" placeholder="solution" v-model="editsolution" maxlength="250"></b-input>
+              <b-input class="note_edit_ip" type="text" placeholder="reference" v-model="editreference" maxlength="100"></b-input>        
+              <b-button type="is-danger" v-bind:id="editnoteid" @click="editNote" v-on:click="isCardModalActive = false">Edit</b-button> 
             </div>
-        </div>
-      </b-collapse> -->
-
-
-      <!-- edit modal -->
-      <b-modal v-if="note.id == editnoteid" v-model="isCardModalActive" :width="640" scroll="keep">
-        <div class="card">
-          <div class="card-content">
-            <b-input class="note_edit_ip" type="text" placeholder="title" v-model="edittitle" maxlength="100"></b-input>
-            <b-input class="note_edit_ip" type="textarea" placeholder="description" v-model="editdescription" maxlength="250"></b-input>
-            <b-input class="note_edit_ip" type="textarea" placeholder="solution" v-model="editsolution" maxlength="250"></b-input>
-            <b-input class="note_edit_ip" type="text" placeholder="reference" v-model="editreference" maxlength="100"></b-input>        
-            <b-button type="is-danger" v-bind:id="editnoteid" @click="editNote" v-on:click="isCardModalActive = false">Edit</b-button> 
           </div>
-        </div>
-      </b-modal>
+        </b-modal>
+        <!-- edit modal end-->
     </li>
   </ul>
   <!-- get all notes end -->
@@ -85,6 +72,7 @@ export default {
       editnoteid: null,
       isActive: false,
       isCardModalActive: false,
+      isModalActive: false,
     };
   },
   created: function() {
@@ -232,6 +220,11 @@ export default {
   margin-top: 20px;
 }
 
+.note_body{
+  width: 80%;
+  margin-left: 10%;
+  padding-top: 3px;
+}
 .note_list {
   display: flex;
   flex-direction: row;
@@ -256,6 +249,8 @@ export default {
 
 .edit_btn, .del_btn{
   margin-right: 2rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 #dropdown_list{
@@ -268,14 +263,22 @@ export default {
 }
 
 .division{
-  background-color:lightcoral;
+  background-color: #F05D23;
   font: white;
   /* height: 3rem; */
   margin-top: 20px;
 }
 
 .show_notes {
-  background-color: lavender;
+  background-color: #F7F4EA;
+}
+
+/* ---------media query--------- */
+@media (max-width: 649px) {
+  .card {
+    width: 80%;
+    margin-left: 11%;
+  }
 }
 
 </style>
