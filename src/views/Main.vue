@@ -1,50 +1,46 @@
 <template>
   <div class="main">
     
+    <!------- add a new category ------>
     <div class="new_category">
     <p id="title_msg"> Add a New Category</p>
     <b-input id="title_ip" type="text" v-model="title" maxlength="30"></b-input>
     <b-button id="title_btn" type="is-danger" @click="newCategory">Add</b-button><br/><br/>
     </div>
+    <!------- add a new category end------>
+ 
 
-    <!-- <b-field label="Edit Category" type="is-success">
-     <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>
-    </b-field>
-    <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button><br/><br/>   -->
-
+    <!------- get all categories & edit & delete ------>
     <ul class="all_categories">
       <li v-for="category of categories" v-bind:key="category.id">
           <div class="category_container">
             <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><div id="category_name"> {{category.title}} </div></router-link>
-          
-          <!----button for note page----->
-          <!-- <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><b-button type="is-success">note</b-button></router-link>  -->
-          
+
           <!--------dropddown---------->
           <b-dropdown id="category_dropdown" aria-role="list">
-              <b-button type="is-success" slot="trigger" slot-scope="{ active }">
+              <b-button id="category_btn" type="is-success" slot="trigger" slot-scope="{ active }">
                   <span id="category_btn_span">•••</span>
                   <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
               </b-button>
               
-              <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="edit_btn" v-on:click="isActive = !isActive" @click="() => {editSelect(category.id, category.title)}">Edit</button></b-dropdown-item>                                    
-              <b-dropdown-item aria-role="listitem"><button v-bind:id="category.id" class="del_btn" @click="deleteCategory">Delete</button></b-dropdown-item>
+              <button v-bind:id="editid" class="edit_btn" v-on:click="isCardModalActive = true" @click="() => {editSelect(category.id, category.title)}">Edit</button>                                    
+              <button v-bind:id="category.id" class="del_btn" @click="deleteCategory">Delete</button>
           </b-dropdown>
-
-          <!-------toggle------->
-          <div v-if="category.id == editid" class="category_toggle">
-          <b-message title="Edit Category"  v-model="isActive" aria-close-label="Close message">
-              <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
-              <b-button type="is-danger" @click="editCategory" v-bind:id="editid">Edit</b-button> 
-          </b-message>
-          </div>
           
-          
+          <!-- edit modal -->
+          <b-modal v-if="category.id == editid" v-model="isCardModalActive" :width="640" scroll="keep">
+            <div class="card">
+              <div class="card-content">
+                <b-input id="edit_ip" type="text" v-model="edittitle" maxlength="30"></b-input>        
+                <b-button type="is-danger" @click="editCategory" v-on:click="isCardModalActive = false" v-bind:id="editid">Edit</b-button> 
+              </div>
+            </div>
+          </b-modal>
+          <!-- edit modal end-->
 
             <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button> -->
             <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="() => {editSelect(category.id, category.title)}">Edit</button> -->
           </div>
-        
       </li>
     </ul>    
   </div>
@@ -61,6 +57,7 @@ export default {
       edittitle: "",
       editid: null,
       isActive: false,
+      isCardModalActive: false,
     };
   },
   created: function() {
@@ -79,6 +76,7 @@ export default {
       body: JSON.stringify({ title: this.title }),
     }).then(() => {
        this.getCategory();
+       this.title="";
     });
    },
    getCategory: function() {
@@ -143,6 +141,7 @@ export default {
 
 #title_ip, #edit_ip {
   width: 50%;
+  margin-left: 25px;
 }
 
 .all_categories {
@@ -174,7 +173,8 @@ export default {
 
 #category_name{
   text-decoration: none;
-  padding-bottom: 1rem;
+  padding-bottom: 5px;
+  margin-top: 5px;
 }
 
 #category_dropdown {
@@ -221,5 +221,24 @@ export default {
 
 #edit_ip {
   width: 80%;
+}
+
+@media (max-width: 615px) {
+  .category_container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    padding-top: 0;
+    height: fit-content;
+  }
+
+  #category_btn {
+  width: 50%;
+  }
+
+  #category_dropdown {
+  padding-top: 0;
+}
 }
 </style>

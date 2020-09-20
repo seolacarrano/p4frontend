@@ -60,7 +60,7 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 | B | Hamburger Menu | H | 1hr | -hr |
 | C | Login HTML & CSS | H | 3hrs | 0.5hr |
 | D | Category page HTML & CSS | H | 3hr | 6hrs |
-| E | Note page HTML & CSS | H | 3hrs | -hr |
+| E | Note page HTML & CSS | H | 3hrs | 7hrs |
 | F | Vue Research | H | 5hrs | 8hrs |
 | G | Login Implementation | H | 5hrs | 5hrs |
 | H | Create Function for Category | H | 3hrs | 3hrs |
