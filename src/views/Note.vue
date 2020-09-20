@@ -1,12 +1,8 @@
 <template>
  <div class="note">
-
-   <!-- create a note -->
+  <!-- create a note -->
   <b-collapse :open="false" aria-id="contentIdForA11y1">
-      <button
-          class="button is-primary"
-          slot="trigger"
-          aria-controls="contentIdForA11y1">Add a New Note</button>
+      <button id="new_note_btn" slot="trigger" aria-controls="contentIdForA11y1">Add a New Note</button>
       <div class="notification">
           <div class="content">
             <b-input class="note_create_ip" type="text" placeholder="title" v-model="title" maxlength="100"></b-input>
@@ -20,35 +16,54 @@
   <!-- create a note end -->
 
 
-  <!-- get all notes -->
+  <!------- get all notes / edit&delete buttons -------->
   <ul class="all_notes">
-    <li v-for="note of notes" v-bind:key="note.id">
+    <li class="note_list" v-for="note of notes" v-bind:key="note.id">
       <b-collapse :open="false" aria-id="contentIdForA11y1">
-        <button
-            class="button is-primary"
-            slot="trigger"
-            aria-controls="contentIdForA11y1">{{note.title}}</button>
-        <div class="notification">
+        <button id="get_note_btn" slot="trigger" aria-controls="contentIdForA11y1">{{note.title}}</button>
+        <div class="notification" id="all_note_notification">
             <div class="content">
-              {{note.description}} <br/>
-              {{note.solution}} <br/>
-              {{note.reference}} <br/>
+              <div id="note_content">  
+              <div id="description"><p class="division">description</p> {{note.description}} </div>
+              <div id="solution"><p class="division">solution</p> {{note.solution}} </div>
+              <div id="reference"><p class="division">reference</p> {{note.reference}} </div>
+              </div>
+              <div id="note_content_btn">
+              <button v-bind:id="note.id" class="edit_btn" v-on:click="isCardModalActive = true" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button>                                    
+              <button v-bind:id="note.id" class="del_btn" @click="deleteNote">Delete</button>
+              </div>
             </div>
         </div>
       </b-collapse>
+    
+    <!-- edit modal -->
+    <b-modal v-if="note.id == editnoteid" v-model="isCardModalActive" :width="640" scroll="keep">
+    <div class="card">
+      <div class="card-content">
+        <p>Edit Note</p>
+        <b-input class="note_edit_ip" type="text" placeholder="title" v-model="edittitle" maxlength="100"></b-input>
+        <b-input class="note_edit_ip" type="textarea" placeholder="description" v-model="editdescription" maxlength="250"></b-input>
+        <b-input class="note_edit_ip" type="textarea" placeholder="solution" v-model="editsolution" maxlength="250"></b-input>
+        <b-input class="note_edit_ip" type="text" placeholder="reference" v-model="editreference" maxlength="100"></b-input>        
+        <b-button type="is-danger" @click="editNote" v-bind:id="editnoteid">Edit</b-button> 
+      </div>
+    </div>
+    </b-modal>
+
       <!--------dropddown---------->
-      <b-dropdown id="note_dropdown" aria-role="list">
-            <b-button type="is-success" slot="trigger" slot-scope="{ active }">
+      <!-- <b-dropdown id="note_dropdown" aria-role="list">
+            <b-button id="note_btn" type="is-success" slot="trigger" slot-scope="{ active }">
                 <span id="note_btn_span">•••</span>
                 <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
             </b-button>
-            
+            <div id="dropdown_list">
             <b-dropdown-item aria-role="listitem"><button v-bind:id="note.id" class="edit_btn" v-on:click="isActive = !isActive" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button></b-dropdown-item>                                    
             <b-dropdown-item aria-role="listitem"><button v-bind:id="note.id" class="del_btn" @click="deleteNote">Delete</button></b-dropdown-item>
-        </b-dropdown>
+            </div>
+        </b-dropdown> -->
 
         <!-------toggle------->
-        <div v-if="note.id == editnoteid" class="note_toggle">
+        <!-- <div v-if="note.id == editnoteid" class="note_toggle">
         <b-message title="Edit Note"  v-model="isActive" aria-close-label="Close message">
             <b-input class="note_edit_ip" type="text" placeholder="title" v-model="edittitle" maxlength="100"></b-input>
             <b-input class="note_edit_ip" type="textarea" placeholder="description" v-model="editdescription" maxlength="250"></b-input>
@@ -56,49 +71,11 @@
             <b-input class="note_edit_ip" type="text" placeholder="reference" v-model="editreference" maxlength="100"></b-input>        
             <b-button type="is-danger" @click="editNote" v-bind:id="editnoteid">Edit</b-button> 
         </b-message>
-        </div>
+        </div> -->
     </li>
   </ul>
   <!-- get all notes end -->
-   
-  
-    <!------------------------------ old version note area -------------------------->
-    <!-- <li v-for="note of notes" v-bind:key="note.id">
-        <div class="note_container">
-          {{note.title}} <br/>
-          {{note.description}} <br/>
-          {{note.solution}} <br/>
-          {{note.reference}} <br/>
-        </div> -->
-
-        <!--------dropddown---------->
-        
-          <!-- <b-dropdown id="note_dropdown" aria-role="list">
-              <b-button type="is-success" slot="trigger" slot-scope="{ active }">
-                  <span id="note_btn_span">•••</span>
-                  <b-icon :icon="active ? 'menu-up' : 'menu-down'"></b-icon>
-              </b-button>
-              
-              <b-dropdown-item aria-role="listitem"><button v-bind:id="note.id" class="edit_btn" v-on:click="isActive = !isActive" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button></b-dropdown-item>                                    
-              <b-dropdown-item aria-role="listitem"><button v-bind:id="note.id" class="del_btn" @click="deleteNote">Delete</button></b-dropdown-item>
-          </b-dropdown> -->
-
-          <!-------toggle------->
-          <!-- <div v-if="note.id == editnoteid" class="note_toggle">
-          <b-message title="Edit Note"  v-model="isActive" aria-close-label="Close message">
-              <b-input class="note_edit_ip" type="text" placeholder="title" v-model="edittitle" maxlength="100"></b-input>
-              <b-input class="note_edit_ip" type="textarea" placeholder="description" v-model="editdescription" maxlength="250"></b-input>
-              <b-input class="note_edit_ip" type="textarea" placeholder="solution" v-model="editsolution" maxlength="250"></b-input>
-              <b-input class="note_edit_ip" type="text" placeholder="reference" v-model="editreference" maxlength="100"></b-input>        
-              <b-button type="is-danger" @click="editNote" v-bind:id="editnoteid">Edit</b-button> 
-          </b-message>
-          </div> -->
-
-        <!-- <button v-bind:id="note.id" class="button is-success is-outlined" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button>
-        <button v-bind:id="note.id" class="button is-success is-outlined" @click="deleteNote">Delete</button> 
-    </li>-->
-    <!------------------------------ old version note area end-------------------------->
-</div>
+ </div>
 </template>
 
 
@@ -118,6 +95,7 @@ export default {
       editreference: "",
       editnoteid: null,
       isActive: false,
+      isCardModalActive: false,
     };
   },
   created: function() {
@@ -198,48 +176,107 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 
-.input_area{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-#note_create_msg, #note_edit_msg {
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 1.5rem;
-}
-
 .note_create_ip, .note_edit_ip, #note_title_btn {
   margin-top: 15px;
 }
 
+#new_note_btn{
+  font-family: 'Ubuntu', sans-serif;
+  transition-duration: 0.4s;
+  background-color: #f44174; 
+  border-radius: 12px;
+  color: black;
+  height: 50px;
+  width: 150px;
+  border: none;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+#new_note_btn:hover {
+  background-color: #42b983; 
+  color: white;
+  cursor: pointer;
+}
+
+#get_note_btn {
+  font-family: 'Ubuntu', sans-serif;
+  transition-duration: 0.4s;
+  background-color: #42b983; 
+  border-radius: 12px;
+  color: white;
+  height: 50px;
+  width: 150%;
+  border: none;
+  cursor: pointer;
+}
+
+#get_note_btn:hover {
+  background-color: #f44174; 
+  color: white;
+  cursor: pointer;
+}
+
 .all_notes {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   flex-wrap: wrap;
   font-family: 'Ubuntu', sans-serif;
   font-size: large;
   margin-top: 20px;
 }
 
-.note_container {
-  height: 150px;
-  width: 150px;
-  padding-top: 2rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
-  border: 1px solid black;
+.note_list {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #42b983;
-  border-radius: 8px;
-  font-family: 'Ubuntu', sans-serif;
-  color: red;
+  flex-direction: row;
+  /* justify-content: center; */
+  margin-left: 40%;
+  padding-bottom: 0.5rem;
+}
+
+#note_btn {
+  width: 50%;
+  cursor: pointer;
 }
 
 #note_btn_span {
   text-align: center;
   margin-left: 15px;
+}
+
+#note_content{
+  margin-left: 1rem;
+}
+
+.edit_btn, .del_btn{
+  margin-right: 2rem;
+}
+
+#dropdown_list{
+  padding-right: 0.5rem;
+}
+
+#all_note_notification {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.division{
+  background-color:lightcoral;
+  font: white;
+  /* height: 3rem; */
+  margin-top: 20px;
+}
+
+#description {
+  background-color: lavender;
+}
+
+#solution {
+  background-color: lavender;
+}
+
+#reference {
+  background-color:lavender;
 }
 </style>
