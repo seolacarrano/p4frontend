@@ -18,7 +18,7 @@
    <!-- get modal -->
    <div class="note_list" v-for="note of notes" v-bind:key="note.id">
     <!-- <button v-bind:id="note.id" class="get_note_btn2" v-on:click="isCardModalActive = true">{{note.title}}</button> -->
-    <button v-bind:id="note.id" class="get_note_btn2" v-on:click="isCardModalActive = true" @click="() => {getSelect(note.id)}">{{note.title}}</button>                                    
+    <button v-bind:id="note.id" class="get_note_btn" v-on:click="isCardModalActive = true" @click="() => {getSelect(note.id)}">{{note.title}}</button>                                    
 
   
     <b-modal v-if="note.id == getnoteid" v-model="isCardModalActive" :width="640" scroll="keep">
@@ -138,6 +138,10 @@ export default {
       body: JSON.stringify({ title: this.title, description: this.description, solution: this.solution, reference: this.reference, category: category}),
     }).then(() => {
        this.getNote();
+       this.title = "";
+       this.description = "";
+       this.solution = "";
+       this.reference = "";
     });
     },
     getSelect: function(id){
@@ -209,23 +213,27 @@ export default {
 #new_note_btn{
   font-family: 'Ubuntu', sans-serif;
   transition-duration: 0.4s;
-  background-color: #f44174; 
+  background-color: white; 
   border-radius: 12px;
   color: black;
   height: 50px;
   width: 150px;
-  border: none;
   margin-bottom: 50px;
   cursor: pointer;
+  justify-content: left;
+  display: flex;
+  margin-left: 10%;
+  padding-top: 15px;
+  padding-left: 20px;
 }
 
 #new_note_btn:hover {
-  background-color: #42b983; 
+  background-color: #f44174; 
   color: white;
   cursor: pointer;
 }
 
-#get_note_btn {
+.get_note_btn {
   font-family: 'Ubuntu', sans-serif;
   transition-duration: 0.4s;
   background-color: #42b983; 
@@ -237,7 +245,7 @@ export default {
   cursor: pointer;
 }
 
-#get_note_btn:hover {
+.get_note_btn:hover {
   background-color: #f44174; 
   color: white;
   cursor: pointer;
@@ -255,9 +263,9 @@ export default {
 .note_list {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
-  margin-left: 40%;
   padding-bottom: 0.5rem;
+  margin-left: 10%;
+  width: 80%;
 }
 
 #note_btn {
