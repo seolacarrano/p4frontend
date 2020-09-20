@@ -15,11 +15,32 @@
   </b-collapse>
   <!-- create a note end -->
 
+   <!-- get modal -->
+   <div class="note_list" v-for="note of notes" v-bind:key="note.id">
+    <!-- <button v-bind:id="note.id" class="get_note_btn2" v-on:click="isCardModalActive = true">{{note.title}}</button> -->
+    <button v-bind:id="note.id" class="get_note_btn2" v-on:click="isCardModalActive = true" @click="() => {getSelect(note.id)}">{{note.title}}</button>                                    
+
+  
+    <b-modal v-if="note.id == getnoteid" v-model="isCardModalActive" :width="640" scroll="keep">
+    <div class="card">
+      <div class="card-content">
+        <p>Edit Note</p>
+        <div id="description2"><p class="division">description</p> {{note.description}} </div>
+        <div id="solution2"><p class="division">solution</p> {{note.solution}} </div>
+        <div id="reference2"><p class="division">reference</p> {{note.reference}} </div>
+        <div id="note_content_btn">
+              <button v-bind:id="note.id" class="edit_btn" v-on:click="isCardModalActive = true" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button>                                    
+              <button v-bind:id="note.id" class="del_btn" @click="deleteNote">Delete</button>
+              </div>
+        </div>
+    </div>
+    </b-modal>
+   </div> 
 
   <!------- get all notes / edit&delete buttons -------->
   <ul class="all_notes">
     <li class="note_list" v-for="note of notes" v-bind:key="note.id">
-      <b-collapse :open="false" aria-id="contentIdForA11y1">
+      <!-- <b-collapse :open="false" aria-id="contentIdForA11y1">
         <button id="get_note_btn" slot="trigger" aria-controls="contentIdForA11y1">{{note.title}}</button>
         <div class="notification" id="all_note_notification">
             <div class="content">
@@ -34,8 +55,9 @@
               </div>
             </div>
         </div>
-      </b-collapse>
-    
+      </b-collapse> -->
+
+
     <!-- edit modal -->
     <b-modal v-if="note.id == editnoteid" v-model="isCardModalActive" :width="640" scroll="keep">
     <div class="card">
@@ -85,6 +107,7 @@ export default {
   data: function(){
     return {
       notes: [],
+      getnoteid: null,
       title: "",
       description: "",
       solution: "",
@@ -116,6 +139,9 @@ export default {
     }).then(() => {
        this.getNote();
     });
+    },
+    getSelect: function(id){
+      this.getnoteid = id
     },
     getNote: function(){
       const {token, URL} = this.$route.query;
