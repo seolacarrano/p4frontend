@@ -265,22 +265,26 @@ export default {
 .division{
   background-color: #F05D23;
   font: white;
-  /* height: 3rem; */
   margin-top: 20px;
+  text-align: center;
 }
 
 .show_notes {
   background-color: #F7F4EA;
-  white-space: pre;
+  /* white-space: pre; */
+  white-space:pre-line;
+  word-break: break-all;
+  text-align: left;
 }
 
 
 /* ---------media query--------- */
-@media (max-width: 649px) {
-  .card {
-    width: 80%;
-    margin-left: 11%;
+/* @media (max-width: 620px) {
+  .show_notes {
+    white-space:pre-line;
+    word-break: break-all;
+    text-align: left;
   }
-}
+}  */
 
 </style>

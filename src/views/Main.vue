@@ -93,7 +93,7 @@ export default {
     //   this.categories = data;
     // });
     .then((data) => {
-        if (data.response) {
+        if (!data.response) {
             this.categories = data
         } else {
             this.categories = []
