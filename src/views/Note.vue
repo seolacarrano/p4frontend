@@ -24,7 +24,7 @@
           <div class="card">
             <div class="note_body">
             <div class="show_notes"><p class="division">title</p> {{note.title}} </div>
-            <div class="show_notes"><p class="division">description</p> {{note.description}} </div>
+            <div id="description" class="show_notes"><p class="division">description</p> {{note.description}} </div>
             <div class="show_notes"><p class="division">solution</p> {{note.solution}} </div>
             <div class="show_notes"><p class="division">reference</p> {{note.reference}} </div>
             </div>
@@ -271,6 +271,11 @@ export default {
 
 .show_notes {
   background-color: #F7F4EA;
+}
+
+#description {
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 /* ---------media query--------- */
