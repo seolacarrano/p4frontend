@@ -23,10 +23,10 @@
         <b-modal v-if="note.id == getnoteid" v-model="isModalActive" :width="640" scroll="keep">
           <div class="card">
             <div class="note_body">
-            <div class="show_notes"><p class="division">title</p> {{note.title}} </div>
-            <div id="description" class="show_notes"><p class="division">description</p> {{note.description}} </div>
-            <div class="show_notes"><p class="division">solution</p> {{note.solution}} </div>
-            <div class="show_notes"><p class="division">reference</p> {{note.reference}} </div>
+              <div class="show_notes"><p class="division">title</p> {{note.title}} </div>
+              <div class="show_notes"><p class="division">description</p> {{note.description}} </div>
+              <div class="show_notes"><p class="division">solution</p> {{note.solution}} </div>
+              <div class="show_notes"><p class="division">reference</p> {{note.reference}} </div>
             </div>
             <button v-bind:id="note.id" class="edit_btn" v-on:click="isCardModalActive = true" @click="() => {editSelect(note.id, note.title, note.description, note.solution, note.reference)}">Edit</button>                                    
             <button v-bind:id="note.id" class="del_btn" @click="deleteNote">Delete</button>
@@ -271,12 +271,9 @@ export default {
 
 .show_notes {
   background-color: #F7F4EA;
+  white-space: pre;
 }
 
-#description {
-  word-wrap: break-word;
-  word-break: break-all;
-}
 
 /* ---------media query--------- */
 @media (max-width: 649px) {

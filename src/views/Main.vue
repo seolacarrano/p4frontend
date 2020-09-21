@@ -4,7 +4,7 @@
     <!------- add a new category ------>
     <div class="new_category">
     <p id="title_msg"> Add a New Category</p>
-    <b-input id="title_ip" type="text" v-model="title" maxlength="30"></b-input>
+    <b-input id="title_ip" type="text" v-model="title" maxlength="30" placeholder="please login to add a category"></b-input>
     <b-button id="title_btn" type="is-danger" @click="newCategory">Add</b-button><br/><br/>
     </div>
     <!------- add a new category end------>
@@ -89,9 +89,16 @@ export default {
       },
     })
     .then((response) => response.json())
+    // .then((data) => {
+    //   this.categories = data;
+    // });
     .then((data) => {
-      this.categories = data;
-    });
+        if (data.response) {
+            this.categories = data
+        } else {
+            this.categories = []
+        }
+      })
     },
     deleteCategory: function(event) {
       const { token, URL } = this.$route.query;
