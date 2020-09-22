@@ -37,9 +37,6 @@
             </div>
           </b-modal>
           <!-- edit modal end-->
-
-            <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="deleteCategory">Delete</button> -->
-            <!-- <button v-bind:id="category.id" class="button is-success is-outlined" @click="() => {editSelect(category.id, category.title)}">Edit</button> -->
           </div>
       </li>
     </ul>    
@@ -89,9 +86,6 @@ export default {
       },
     })
     .then((response) => response.json())
-    // .then((data) => {
-    //   this.categories = data;
-    // });
     .then((data) => {
         if (!data.response) {
             this.categories = data
@@ -173,7 +167,6 @@ export default {
   align-items: center;
   border: 1px solid #42b983;
   border-radius: 8px;
-  /* background-image: url("https://res.cloudinary.com/dqduwnrb1/image/upload/v1600310362/coding_asvhd8.jpg"); */
   font-family: 'Ubuntu', sans-serif;
   color: red;
 }
@@ -200,7 +193,7 @@ export default {
 
 .del_btn, .edit_btn {
   margin-left: 3rem;
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   border: none;
   color: white;
   text-align: center;
@@ -210,11 +203,6 @@ export default {
   cursor: pointer;
   border-radius: 12px;
 }
-
-/* #category_button {
-  width: 50%;
-  height: 50%;
-} */
 
 #category_btn_span {
   text-align: center;
