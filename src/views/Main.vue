@@ -161,6 +161,7 @@ export default {
   padding-bottom: 9rem;
   margin-left: 5rem;
   margin-right: 5rem;
+  margin-bottom: 2rem;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -242,5 +243,13 @@ export default {
   #category_dropdown {
   padding-top: 0;
 }
+}
+
+@media (max-width: 927px) {
+  .category_container {
+    margin-top: 15px;
+    margin-left: 8px;
+    margin-right: 12px;
+  }
 }
 </style>
