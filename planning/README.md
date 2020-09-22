@@ -1,7 +1,7 @@
 # Project Overview
 
 ## Project Link
-- [Link](https://sharp-lewin-c44ba6.netlify.app/#)
+- [Link](https://sa-wrong-answer-note.netlify.app/#)
 
 ## Project Schedule
 
@@ -9,9 +9,9 @@
 |---|---| ---|
 |Day 1| Project Description | Complete
 |Day 1| Wireframes / Priority Matrix / Timeline `backend` and `frontend`| Complete
-|Day 2| Working RestAPI | Incomplete
-|Day 3| Core Application Structure (HTML, CSS, etc.) | Incomplete
-|Day 4| MVP & Bug Fixes | Incomplete
+|Day 2| Working RestAPI | Complete
+|Day 3| Core Application Structure (HTML, CSS, etc.) | Complete
+|Day 4| MVP & Bug Fixes | Cmplete
 |Day 5| Final Touches and Present | Incomplete
 
 ## Project Description
@@ -71,19 +71,19 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 | M | Read Function for Note | H | 2hrs | 2hrs |
 | N | Update Function for Note | H | 2hrs | 1hr |
 | O | Delete Function for List | H | 2hr | 1hr |
-| P | Login HTML/CSS Debugging | H | 3hrs | 2hrs |
+| P | Login HTML/CSS Debugging | H | 3hrs | 6hrs |
 | Q | Category HTML/CSS Debugging | H | 3hrs | 3hrs |
 | R | Note HTML/CSS Debugging | H | 3hrs | 6hrs |
-| S | Blackbox Testing & Deployment | H | 3hrs | -hr |
-| - | Total | - | 50hrs | -hrs |
+| S | Blackbox Testing & Deployment | H | 3hrs | 3hrs |
+| - | Total | - | 50hrs | 66hrs |
 
 #### PostMVP
 | Letter | Component | Priority | Estimated Time | Time Invested |
 | --- | --- | :---: |  :---: | :---: |
-| A | Hover effect | L | 1hr | -hr |
-| B | Add button shadow effects | L | 1hr | -hr |
-| C | Landing Page | M | 3hrs | -hr |
-| - | Total | - | 5hrs | -hrs |
+| A | Hover effect | L | 1hr | 1hr |
+| B | Add button shadow effects | L | 1hr | 1hr |
+| C | Landing Page | M | 3hrs | 3hrs |
+| - | Total | - | 5hrs | 5hrs |
 
 ## Additional Libraries
 - [Vue](https://vuejs.org)
@@ -92,11 +92,12 @@ For the unit04 project, I'm creating a wrong answer note. Users sign up and logi
 
 ## Code Snippets
 ```
+<router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><div v-bind:id="category.id" class="category_name"> {{category.title}} </div></router-link>
 
 ```
-
+To get the data from anotehr page to the other page, I needed to grab the id. 
 
 ## Issues and Resolutions
 
-**ERROR**:               
-**RESOLUTION**: 
+**ERROR**: After editing note, getting note didn't work            
+**RESOLUTION**: I was using the same modal for two different functions, so I made another modal. 

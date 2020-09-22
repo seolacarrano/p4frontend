@@ -50,7 +50,7 @@ export default {
             .then(data => {
                 console.log(data)
                 if (data) {
-                this.$emit('loggedIn', data)
+                this.$emit('loggedIn', data);
                 } else {
                     alert('In correct login')
                 }

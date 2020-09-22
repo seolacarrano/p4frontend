@@ -4,7 +4,6 @@
     <Header v-bind:info="{URL:URL,token:token}" v-bind:URL="URL" v-bind:loggedIn="loggedIn" @logout="logout" />
     </div>
     <router-view @loggedIn="login($event)"/>
-    <!-- <router-view @signedUp="signup($event)"/> -->
     <Footer/>
   </div>
 </template>
@@ -26,6 +25,14 @@ export default {
       URL: 'https://sap4backend.herokuapp.com',
     };
   },
+  beforeMount: function() {
+       const getLogin = JSON.parse(window.sessionStorage.getItem('login'))
+       console.log(getLogin)
+       if(getLogin) {
+         console.log("created running")
+         this.login(getLogin);
+       }
+    },  
   methods: {
     login: function(event){
       console.log('event heard')
@@ -34,15 +41,17 @@ export default {
       this.$router.push({ 
         path: 'Main', 
         query: { token: this.token, URL: this.URL },
-      });
+      }).catch(()=>{});
+      window.sessionStorage.setItem('login', JSON.stringify(event));
     },
     logout: function(){
       this.loggedIn = false;
       this.token = {};
-      this.$router.push('/')
+      this.$router.push('/');
+      
     },
-  },  
-};
+  }
+}
 </script>
 
 <style>

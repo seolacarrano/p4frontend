@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <b-navbar>
+    <b-navbar id="navbar">
       <template slot="brand">
         
           <img
@@ -14,14 +14,8 @@
         <router-link to="/" id="home">Home</router-link>
         </b-navbar-item>
         <b-navbar-item href="#">
-        <!-- <router-link to="/Main">Category</router-link> -->
         <router-link :to="{name: 'Main', query: $attrs.info}">Category</router-link>
         </b-navbar-item>
-        <b-navbar-item href="#">
-        <!-- <router-link to="/Note">Note</router-link> -->
-        <router-link :to="{name: 'Note', query: $attrs.info}">Note</router-link> 
-        </b-navbar-item>
-   
       </template>
 
       <template slot="end">
@@ -52,7 +46,7 @@ export default {
 <style>
 .header {
   width: 100%;
-  margin: 10px auto
+  margin: 10px auto;
 }
 
 #signup_btn {

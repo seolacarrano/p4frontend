@@ -4,7 +4,7 @@
     <!------- add a new category ------>
     <div class="new_category">
     <p id="title_msg"> Add a New Category</p>
-    <b-input id="title_ip" type="text" v-model="title" maxlength="30" placeholder="please login to add a category"></b-input>
+    <b-input id="title_ip" type="text" v-model="title" maxlength="30"></b-input>
     <b-button id="title_btn" type="is-danger" @click="newCategory">Add</b-button><br/><br/>
     </div>
     <!------- add a new category end------>
@@ -14,7 +14,7 @@
     <ul class="all_categories">
       <li v-for="category of categories" v-bind:key="category.id">
           <div class="category_container">
-            <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><div id="category_name"> {{category.title}} </div></router-link>
+            <router-link :to="{name: 'Note', query: $route.query, params:{categoryid: category.id}}"><div v-bind:id="category.id" class="category_name"> {{category.title}} </div></router-link>
 
           <!--------dropddown---------->
           <b-dropdown id="category_dropdown" aria-role="list">
@@ -178,7 +178,7 @@ export default {
   color: red;
 }
 
-#category_name{
+.category_name{
   text-decoration: none;
   padding-bottom: 5px;
   margin-top: 5px;
@@ -231,6 +231,12 @@ export default {
 }
 
 /* ---------media query--------- */
+@media (max-width: 1234px) {
+  .category_container {
+    margin-top: 15px;
+  }
+}
+
 @media (max-width: 615px) {
   .category_container {
     margin-bottom: 20px;
